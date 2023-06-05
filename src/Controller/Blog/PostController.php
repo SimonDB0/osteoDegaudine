@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PostController extends AbstractController
 {
-    #[Route('/post', name: 'app_post',methods: ['GET'])]
+    #[Route('/blog/post', name: 'app_post',methods: ['GET'])]
     public function index(PostRepository $postRepository): Response
     {
         $posts = $postRepository->findPublished();

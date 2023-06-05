@@ -46,7 +46,7 @@ class Post
     private \DateTimeImmutable $updatedAt;
 
     #[ORM\OneToOne(inversedBy:'post',targetEntity: Thumbnail::class, cascade: ['persist', 'remove'])]
-    private Thumbnail $thumbnail;
+    private ?Thumbnail $thumbnail = null;
 
 
     public function __construct()
@@ -62,7 +62,7 @@ class Post
         $this->slug = (new Slugify())->slugify($this->title);
     }
     #[ORM\PreUpdate]
-    public function preUpdate(): self
+    public function preUpdate()
     {
         $this->updatedAt = new \DateTimeImmutable();
     }
@@ -184,15 +184,15 @@ class Post
     /**
      * @return Thumbnail
      */
-    public function getThumbnail(): Thumbnail
+    public function getThumbnail(): ?Thumbnail
     {
         return $this->thumbnail;
     }
 
     /**
-     * @param Thumbnail $thumbnail
+     * @param ?Thumbnail $thumbnail
      */
-    public function setThumbnail(Thumbnail $thumbnail): self
+    public function setThumbnail(?Thumbnail $thumbnail): self
     {
         $this->thumbnail = $thumbnail;
         return $this;
