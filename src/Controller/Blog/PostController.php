@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PostController extends AbstractController
 {
-    #[Route('/blog/post', name: 'app_post',methods: ['GET'])]
+    #[Route('/blog', name: 'app_blog',methods: ['GET'])]
     public function index(
         PostRepository $postRepository,
         PaginatorInterface $paginatorInterface,
@@ -25,8 +25,6 @@ class PostController extends AbstractController
             $request->query->getInt('page', 1),
             9
         );
-
-
 
         return $this->render('post/index.html.twig', [
             'posts' => $posts,
