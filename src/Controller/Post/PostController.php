@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Controller\Blog;
+namespace App\Controller\Post;
 
+use App\Entity\Post\Post;
 use App\Repository\Post\PostRepository;
 
 use Knp\Component\Pager\PaginatorInterface;
@@ -17,17 +18,24 @@ class PostController extends AbstractController
         PostRepository $postRepository,
         PaginatorInterface $paginatorInterface,
         Request $request
-    ): Response
-    {
+    ): Response{
         $data= $postRepository->findPublished();
         $posts = $paginatorInterface->paginate(
             $data,
             $request->query->getInt('page', 1),
             9
         );
-
         return $this->render('post/index.html.twig', [
             'posts' => $posts,
         ]);
     }
+   #[Route('/blog/article/{slug}',name:'app_blog_show',methods:['GET'])]
+    public function show(Post $post,PostRepository $postRepository): Response
+    {
+        //$post = $postRepository->findOneBy(['slug'=>$post->getSlug()]);
+        return $this->render('post/show.html.twig', [
+            'post' => $post,
+        ]);
+    }
+
 }
