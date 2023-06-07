@@ -23,7 +23,7 @@ class PostController extends AbstractController
         $posts = $paginatorInterface->paginate(
             $data,
             $request->query->getInt('page', 1),
-            9
+
         );
         return $this->render('post/index.html.twig', [
             'posts' => $posts,
