@@ -1,104 +1,28 @@
-<nav
-        class="relative flex w-full items-center justify-between bg-white py-2 text-neutral-600 shadow-lg hover:text-neutral-700 focus:text-neutral-700 dark:bg-neutral-600 dark:text-neutral-200 md:flex-wrap md:justify-start"
-        data-te-navbar-ref>
-    <div class="flex w-full flex-wrap items-center justify-between px-3">
-        <div class="flex items-center">
-            <!-- Hamburger menu button -->
-            <button
-                    class="border-0 bg-transparent px-2 text-xl leading-none transition-shadow duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 dark:hover:text-white dark:focus:text-white lg:hidden"
-                    type="button"
-                    data-te-collapse-init
-                    data-te-target="#navbarSupportedContentY"
-                    aria-controls="navbarSupportedContentY"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation">
-                <!-- Hamburger menu icon -->
-                <span class="[&>svg]:w-5">
-            <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="h-7 w-7">
-              <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+<nav class="flex items-center justify-between p-6 bg-white">
+    <div>
+        <span class="text-2xl font-bold">Estelle Degaudine</span>
+    </div>
+    <div id="menu-button" class="md:hidden">
+        <button class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-white hover:border-white">
+            <svg class="fill-current h-3 w-3" viewBox="0 0 20 20">
+                <title>Menu</title>
+                <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
             </svg>
-          </span>
-            </button>
+        </button>
+    </div>
+    <div id="menu" class="hidden md:flex md:items-center md:w-2/3 w-full">
+        <div class="text-md md:flex-grow">
+            <a href="{{ path('home') }}" class="block mt-4 md:inline-block md:mt-0 mr-6 no-underline text-gray-600 hover:text-gray-800">Accueil</a>
+            <a href="#" class="block mt-4 md:inline-block md:mt-0 mr-6 no-underline text-gray-600 hover:text-gray-800">Rendez-vous</a>
+            <a href="{{ path('app_blog') }}" class="block mt-4 md:inline-block md:mt-0 mr-6 no-underline text-gray-600 hover:text-gray-800">Blog</a>
+            <a href="#" class="block mt-4 md:inline-block md:mt-0 mr-6 no-underline text-gray-600 hover:text-gray-800">Ostéopathie</a>
+            <a href="#" class="block mt-4 md:inline-block md:mt-0 mr-6 no-underline text-gray-600 hover:text-gray-800">Soins énergétique</a>
+            <a href="#" class="block mt-4 md:inline-block md:mt-0 no-underline text-gray-600 hover:text-gray-800">Contact</a>
+        </div>
+        <div>
+            <a href="#" class="inline-block text-sm px-4 py-2 leading-none border rounded text-black bg-white border-gray-300 hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 md:mt-0">Inscription</a>
+            <a href="#" class="inline-block text-sm px-4 py-2 leading-none border rounded text-black bg-white border-gray-300 hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 md:mt-0">Connexion</a>
         </div>
 
-        <!-- Navigation links -->
-        <div
-                class="!visible hidden grow basis-[100%] items-center lg:!flex lg:basis-auto"
-                id="navbarSupportedContentY"
-                data-te-collapse-item>
-            <ul
-                    class="mr-auto flex flex-col lg:flex-row"
-                    data-te-navbar-nav-ref>
-                <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-                    <a
-                            class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                            href="{{ path('home') }}"
-                            data-te-nav-link-ref
-                            data-te-ripple-init
-                            data-te-ripple-color="light"
-                    >Acceuil</a
-                    >
-                </li>
-                <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-                    <a
-                            class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                            href="#"
-                            data-te-nav-link-ref
-                            data-te-ripple-init
-                            data-te-ripple-color="light"
-                    >Ostéopathie</a
-                    >
-                <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-                    <a
-                            class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                            href="#"
-                            data-te-nav-link-ref
-                            data-te-ripple-init
-                            data-te-ripple-color="light"
-                    >Soins énergétique</a
-                    >
-                <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-                    <a
-                            class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                            href="https://progenda.be/centers/degaudine-estelle"
-                            data-te-nav-link-ref
-                            data-te-ripple-init
-                            data-te-ripple-color="light"
-                            target="_blank"
-                    >Prendre rendez-vous
-                    </a>
-                </li>
-                <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-                    <a
-                            class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                            href="{{ path('app_blog') }}"
-                            data-te-nav-link-ref
-                            data-te-ripple-init
-                            data-te-ripple-color="light"
-                    >Blog</a>
-                </li>
-                <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-                    <a
-                            class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                            href="#!"
-                            data-te-nav-link-ref
-                            data-te-ripple-init
-                            data-te-ripple-color="light"
-                    >Contactez-moi</a
-                    >
-                </li>
-
-
-            </ul>
-        </div>
     </div>
 </nav>

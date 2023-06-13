@@ -11,13 +11,11 @@ import 'tw-elements'
 
 
 // menu hamburger
-document.addEventListener('DOMContentLoaded', (event) => {
-    const navButton = document.querySelector('[data-te-collapse-init]');
-    const navMenu = document.querySelector('#navbarSupportedContentY');
-
-    navButton.addEventListener('click', () => {
-        navMenu.classList.toggle('hidden');
-        navMenu.classList.toggle('flex');
-    });
+document.getElementById('menu-button').addEventListener('click', function() {
+    var menu = document.getElementById('menu');
+    if (menu.className.indexOf('hidden') !== -1) {
+        menu.className = menu.className.replace('hidden', 'block');
+    } else {
+        menu.className = menu.className.replace('block', 'hidden');
+    }
 });
-
