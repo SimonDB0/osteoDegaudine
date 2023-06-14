@@ -2,9 +2,12 @@
 
 namespace App\Controller\Post;
 
+use App\Entity\Post\Comment;
 use App\Entity\Post\Post;
+use App\Form\CommentType;
 use App\Repository\Post\PostRepository;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,12 +32,33 @@ class PostController extends AbstractController
             'posts' => $posts,
         ]);
     }
-   #[Route('/blog/article/{slug}',name:'app_blog_show',methods:['GET'])]
-    public function show(Post $post,PostRepository $postRepository): Response
+   #[Route('/blog/article/{slug}',name:'app_blog_show',methods:['GET','POST'])]
+    public function show(Post $post,Request $request,EntityManagerInterface $em): Response
     {
-        //$post = $postRepository->findOneBy(['slug'=>$post->getSlug()]);
+        $comment = new Comment();
+        if ($this->getUser()){
+            $comment->setAuthor($this->getUser());
+        }
+
+
+        $form = $this->createForm(CommentType::class,$comment);
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid()){
+            $em->persist($comment);
+            $em->flush();
+
+            $this->addFlash('success','Votre commentaire a bien été ajouté');
+
+            return $this->redirectToRoute('app_blog_show',[
+                'slug' => $post->getSlug()
+            ]);
+        }
+
         return $this->render('post/show.html.twig', [
             'post' => $post,
+            'form' => $form->createView(),
         ]);
     }
 
