@@ -19,19 +19,19 @@ class UserFixtures extends Fixture
     {
         $faker = Factory::create('fr_FR');
 
-        $user = new User();
-        $user->setEmail('admin@admin.be')
+        $admin = new User();
+        $admin->setEmail('admin@admin.be')
             ->setLastname('De Boe')
             ->setFirstname('Simon')
-            ->setRoles(['ROLE_ADMIN'])
+            ->setRoles(["ROLE_ADMIN"])
             ->setPassword(
                 $this->hasher->hashPassword(
-                    $user,
+                    $admin,
                     'password'
                 )
 
             );
-        $manager->persist($user);
+        $manager->persist($admin);
 
         for ($i = 0; $i < 15; $i++) {
             $user = new User();

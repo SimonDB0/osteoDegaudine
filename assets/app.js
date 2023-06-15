@@ -11,11 +11,4 @@ import 'tw-elements'
 
 
 // menu hamburger
-document.getElementById('menu-button').addEventListener('click', function() {
-    var menu = document.getElementById('menu');
-    if (menu.className.indexOf('hidden') !== -1) {
-        menu.className = menu.className.replace('hidden', 'block');
-    } else {
-        menu.className = menu.className.replace('block', 'hidden');
-    }
-});
+
