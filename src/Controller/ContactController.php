@@ -2,39 +2,34 @@
 
 namespace App\Controller;
 
+use App\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Form\ContactType;
 
 class ContactController extends AbstractController
 {
 
     #[Route('/contact', name: 'contact')]
-    public function index(Request $request, \Swift_Mailer $mailer)
+    public function index(Request $request, MailerInterface $mailer)
     {
         $form = $this->createForm(ContactType::class);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $contact = $form->getData();
+            $contactFormData = $form->getData();
 
-            // Ici, vous pouvez utiliser les données du formulaire pour envoyer un email
+            $email = (new Email())
+                ->from($contactFormData['email'])
+                ->to('simondeboe7090@gmail.com')
+                ->text($contactFormData['message'])
+                ->html('<p>See Twig integration for better HTML integration!</p>');
 
-            $message = (new \Swift_Message('Nouveau message de contact'))
-                ->setFrom($contact['email'])
-                ->setTo('votre-email@domaine.com')
-                ->setBody(
-                    $contact['message'],
-                    'text/plain'
-                )
-            ;
+            $mailer->send($email);
 
-            $mailer->send($message);
-
-            $this->addFlash('success', 'Votre message a été envoyé');
-
-            return $this->redirectToRoute('contact');
+// do something else
         }
 
         return $this->render('contact/index.html.twig', [
