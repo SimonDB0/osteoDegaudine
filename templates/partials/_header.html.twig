@@ -14,12 +14,12 @@
             {% if app.user %}
                 <div>
                     <a class="text-gray-800 text-sm font-semibold hover:text-indigo-500" href="{{ path('security.logout') }}">Logout</a>
-                    <span class="text-gray-800 text-sm">lololol</span>
+                    <span class="text-gray-800 text-sm"></span>
                 </div>
             {% else %}
                 <div>
-                    <a class="text-gray-800 text-sm font-semibold hover:text-indigo-500" href="{{ path('security.login') }}">Connexion</a>
-                    <a class="text-gray-800 text-sm font-semibold hover:text-indigo-500" href="#">Inscription</a>
+                    <a class=" text-sm font-semibold hover:text-indigo-500 text-blue-600" href="{{ path('security.login') }}">Connexion</a>
+                    <a class="text-sm font-semibold hover:text-indigo-500 ml-2 text-blue-600" href="{{ path('account_register') }}" >Inscription</a>
                 </div>
             {% endif %}
         </div>

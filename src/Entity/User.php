@@ -11,8 +11,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Uid\Uuid;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[UniqueEntity('email', 'Cette adresse email est déjà utilisée.')]
+#[UniqueEntity('email', message: 'Cette adresse email est déjà utilisée.')]
 #[ORM\HasLifecycleCallbacks]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -22,7 +23,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $id = null;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\NotBlank()]
     private string $avatar;
 
     #[ORM\Column(type: 'string', length: 255, unique: true)]
@@ -53,6 +53,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'datetime_immutable')]
     #[Assert\NotNull()]
     private \DateTimeImmutable $updatedAt;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $confirmationToken = null;
+
+    #[ORM\Column(type: 'boolean')]
+    private bool $confirmed = false;
 
     public function __construct()
     {
@@ -178,6 +184,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getConfirmationToken(): ?string
+    {
+        return $this->confirmationToken;
+    }
+
+    public function setConfirmationToken(?string $confirmationToken): self
+    {
+        $this->confirmationToken = $confirmationToken;
+
+        return $this;
+    }
+
+    public function isConfirmed(): bool
+    {
+        return $this->confirmed;
+    }
+
+    public function setConfirmed(bool $confirmed): self
+    {
+        $this->confirmed = $confirmed;
 
         return $this;
     }
