@@ -12,3 +12,19 @@ import 'tw-elements'
 
 // menu hamburger
 
+const menuToggle = document.getElementById('menu-toggle');
+const menuLinks = document.querySelector('.md\\:flex > .flex-col');
+
+menuToggle.addEventListener('click', () => {
+    menuLinks.classList.toggle('hidden');
+});
+
+// JavaScript pour activer le dropdown
+document.addEventListener("DOMContentLoaded", function() {
+    var dropdownToggle = document.getElementById("admin-dropdown-toggle");
+    var dropdownMenu = document.getElementById("admin-dropdown");
+
+    dropdownToggle.addEventListener("click", function() {
+        dropdownMenu.classList.toggle("hidden");
+    });
+});

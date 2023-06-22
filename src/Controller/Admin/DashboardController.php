@@ -19,9 +19,6 @@ class DashboardController extends AbstractDashboardController
     #[isGranted("ROLE_ADMIN")]
     public function index(): Response
     {
-
-
-
         return $this->render('admin/dashboard.html.twig');
     }
 
@@ -35,11 +32,10 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linktoRoute('Back to the website', 'fas fa-home', 'app_blog');
-
         yield MenuItem::linkToCrud('Utilisateur', 'fas fa-list', User::class);
         yield MenuItem::linkToCrud('Articles', 'fas fa-list', Post::class);
         yield MenuItem::linkToCrud('Catégories', 'fas fa-list', Category::class);
         yield MenuItem::linkToCrud('Commentaires', 'fas fa-list', Comment::class);
+        yield MenuItem::linktoRoute('Back to the website', 'fas fa-home', 'app_blog');
     }
 }
