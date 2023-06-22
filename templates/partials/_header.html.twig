@@ -1,20 +1,20 @@
 <nav class="bg-white px-6 py-4 shadow">
     <div class="flex flex-col md:flex-row items-center justify-between">
         <div class="text-2xl font-semibold text-gray-700">
-            <a href="{{ path('home') }}">Acceuil</a>
+            <a href="{{ path('home') }}">Estelle Degaudine</a>
         </div>
         <div class="md:flex items-center">
             <div class="flex flex-col md:flex-row md:mx-6">
-                <a class="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0" href="#">Osteopathie</a>
+                <a class="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0" href="{{ path('app_osteopathie') }}">Osteopathie</a>
                 <a class="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0" href="#">Soins Energetique</a>
                 <a class="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0" href="{{ path('app_blog') }}">Blog</a>
-                <a class="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0" href="#">Prise de Rendez-vous</a>
+                <a class="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0"  target="_blank" href="https://progenda.be/centers/degaudine-estelle">Prise de Rendez-vous</a>
                 <a class="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0" href="{{ path('contact') }}">Contact</a>
             </div>
             {% if app.user %}
                 <div>
-                    <a class="text-gray-800 text-sm font-semibold hover:text-indigo-500" href="{{ path('security.logout') }}">Logout</a>
-                    <span class="text-gray-800 text-sm"></span>
+                    <a class="text-blue-600 text-sm font-semibold hover:text-indigo-500" href="{{ path('security.logout') }}">Logout</a>
+                    <span class="text-gray-800 text-sm font-bold ml-2">{{ app.user }}</span>
                 </div>
             {% else %}
                 <div>
