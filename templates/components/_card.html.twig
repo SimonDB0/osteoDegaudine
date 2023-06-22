@@ -1,25 +1,24 @@
- <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 my-8 mr-4">
-        {% if post.thumbnail %}
-            <a href="{{ path('app_blog_show',{slug:post.slug}) }}">
-                <img src="{{ vich_uploader_asset(post.thumbnail,'imageFile') }}" alt="{{ post.thumbnail.imageName }}" class="rounded-t lg"/>
-            </a>
-        {% endif %}
-        <div class="p-5">
-            <a href="{{ path('app_blog_show',{slug:post.slug}) }}">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ post.title }}</h5>
-            </a>
-            <div class="w-2/3 mx-auto my-8 leading-6">
-                {%include "components/_badges.html.twig" with {
-                    badges: post.categories
-                } %}
-            </div>
-            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ post.content | raw | slice(0, 200) ~ '...' }}</p>
-            <a href="{{ path('app_blog_show',{slug:post.slug}) }}" class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 ">Lire la suite &nbsp;
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-                </svg>
-
-            </a>
+<div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 my-8 mr-4">
+    {% if post.thumbnail %}
+        <a href="{{ path('app_blog_show',{slug:post.slug}) }}">
+            <img src="{{ vich_uploader_asset(post.thumbnail,'imageFile') }}" alt="{{ post.thumbnail.imageName }}" class="rounded-t lg"/>
+        </a>
+    {% endif %}
+    <div class="p-5">
+        <a href="{{ path('app_blog_show',{slug:post.slug}) }}">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ post.title }}</h5>
+        </a>
+        <div class="w-2/3 mx-auto my-8 leading-6">
+            {% include "components/_badges.html.twig" with {
+                badges: post.categories
+            } %}
         </div>
-
+        {% set sanitizedContent = post.content|striptags %}
+        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ sanitizedContent|slice(0, 200) ~ '...' }}</p>
+        <a href="{{ path('app_blog_show',{slug:post.slug}) }}" class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 ">Lire la suite &nbsp;
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+            </svg>
+        </a>
     </div>
+</div>

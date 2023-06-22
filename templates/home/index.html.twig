@@ -2,6 +2,85 @@
 
 {% block title %}Hello HomeController!{% endblock %}
 
+
+
 {% block body %}
-Olaaaa
+<body class="bg-white">
+<header class="bg-blue-500 text-white text-center py-5">
+    <h1 class="text-4xl">Présentation</h1>
+</header>
+
+<main class="px-10 py-5 grid grid-cols-1 md:grid-cols-2 gap-10">
+    <div>
+        <img src="https://osteo-degaudine.be/wp-content/uploads/2021/06/Estelle-Degaudine-osteopathe.jpg" alt="Photo de l'ostéopathe" class="w-1/2 object-cover text-center rounded-lg shadow-md">
+    </div>
+
+    <div>
+        <h2 class="text-3xl text-blue-500 mb-5">Estelle Degaudine</h2>
+        <h3 class="text-xl text-blue-500 mb-3">Disponibilités</h3>
+        <ul class="mb-5 space-y-1">
+            <li>Lundi : fermé</li>
+            <li>Mardi : 9h - 18h (Chièvres)</li>
+            <li>Mercredi : 9h - 17h (Neufvilles)</li>
+            <li>Jeudi : 9h - 17h (Neufvilles)</li>
+            <li>Vendredi : 9h-17h (Neufvilles)</li>
+        </ul>
+
+        <a href="https://progenda.be/centers/degaudine-estelle" target="_blank" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 inline-block text-center">
+            Prenez rendez-vous
+        </a>
+    </div>
+</main>
+    <div class="grid md:grid-cols-2 gap-6 px-5 py-10">
+        <!-- Card 1 -->
+        <div class="border border-blue-500 rounded-lg p-5 shadow-lg">
+            <div class="flex items-center space-x-3">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6 text-blue-500">
+                    <!-- Replace this with your preferred icon -->
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                </svg>
+                <h2 class="text-blue-500">0478/68.97.77</h2>
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="border border-blue-500 rounded-lg p-5 shadow-lg">
+            <div class="flex items-center space-x-3">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6 text-blue-500">
+                    <!-- Replace this with your preferred icon -->
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                </svg>
+                <h2 class="text-blue-500">e.degaudine@gmail.com</h2>
+            </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="border border-blue-500 rounded-lg p-5 shadow-lg">
+            <div class="flex items-center space-x-3">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6 text-blue-500">
+                    <!-- Replace this with your preferred icon -->
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                </svg>
+                <p class="text-blue-500">Centre Médi-Chièvres 75 Grand’Rue 7950 Chièvres</p>
+            </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="border border-blue-500 rounded-lg p-5 shadow-lg">
+            <div class="flex items-center space-x-3">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6 text-blue-500">
+                    <!-- Replace this with your preferred icon -->
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                </svg>
+                <p class="text-blue-500">Centre Ostéonergie 92 Rue de la Gage, 7063 Neufvilles</p>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
 {% endblock %}
+
+
