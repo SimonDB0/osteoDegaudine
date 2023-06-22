@@ -25,7 +25,7 @@ class ContactController extends AbstractController
                 ->from($contactFormData['email'])
                 ->to('simondeboe7090@gmail.com')
                 ->text($contactFormData['message'])
-                ->html('<p>See Twig integration for better HTML integration!</p>');
+                ->html($contactFormData['message']);
 
             $mailer->send($email);
 
