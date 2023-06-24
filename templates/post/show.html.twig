@@ -10,10 +10,9 @@
     <h1 class="text-5xl text-center mt-8 mb-4 text-blue-700">{{ post.title | capitalize }}</h1>
     <h2 class="text-2xl text-center mb-8">Publié le {{ post.createdAt | date('d/m/Y') }}</h2>
 
-    {% if post.thumbnail %}
+    {% if post.attachment%}
 
-        <img src="{{ vich_uploader_asset(post.thumbnail,'imageFile') }}" alt="{{ post.thumbnail.imageName }}"
-             class="rounded-t-lg">
+        <img src=" {{ vich_uploader_asset(post,'attachmentFile') }}" class="rounded-t-lg mx-auto ">
 
     {% endif %}
     <div class="w-2/3 mx-auto my-8 leading-6">

@@ -36,7 +36,7 @@ class Category
     #[Assert\NotNull(message: 'La date de création doit être renseignée')]
     private \DateTimeImmutable $createdAt;
 
-    #[ORM\ManyToMany(targetEntity: Post::class, inversedBy: "categories")]
+    #[ORM\ManyToMany(targetEntity: Post::class, mappedBy: "categories")]
     private Collection $posts;
 
     public function __construct()

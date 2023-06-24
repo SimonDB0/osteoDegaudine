@@ -51,5 +51,21 @@ class PostRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    /**
+     * @param string $title
+     * Permet de faire une recherche
+     * @return array
+     */
+    public function findByTitle(string $title): array
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.title LIKE :title')
+            ->setParameter('title', '%'.$title.'%')
+            ->orderBy('p.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
 }
 

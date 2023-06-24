@@ -62,5 +62,24 @@ class PostController extends AbstractController
         ]);
     }
 
+    #[Route('/blog/search', name: 'app_blog_search', methods: ['GET'])]
+    public function search(
+        PostRepository     $postRepository,
+        PaginatorInterface $paginatorInterface,
+        Request            $request
+    ): Response
+    {
+        $title = $request->query->get('title', '');
+        $data = $postRepository->findByTitle($title);
+        $posts = $paginatorInterface->paginate(
+            $data,
+            $request->query->getInt('page', 1),
+        );
+
+        return $this->render('post/index.html.twig', [
+            'posts' => $posts,
+        ]);
+    }
+
 
 }

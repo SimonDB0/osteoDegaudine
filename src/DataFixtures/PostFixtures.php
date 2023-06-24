@@ -17,7 +17,9 @@ class PostFixtures extends Fixture
             $post = new Post();
             $post->setTitle($faker->sentence(mt_rand(3, 6)))
                 ->setContent($faker->realText(1800))
-                ->setState(mt_rand(0, 2) === 1 ? Post::STATES[0] : Post::STATES[1]);
+                ->setState(mt_rand(0, 2) === 1 ? Post::STATES[0] : Post::STATES[1])
+                ->setAttachment('sim.jpg');
+
 
             $manager->persist($post);
         }

@@ -7,53 +7,78 @@ use App\Repository\Post\PostRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\String_;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
+
+
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-#[UniqueEntity(
-    'slug', message: 'Ce slug existe déjà.')]
+#[UniqueEntity("slug", message: "Ce slug existe déjà.")]
+#[Vich\Uploadable]
 class Post
 {
     const STATES = ['STATE_DRAFT', 'STATE_PUBLISHED', 'STATE_ARCHIVED'];
 
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column()
+     */
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
+
     #[Assert\NotBlank]
-    #[ORM\Column(type: 'string', length: 255, unique: true)]
+    #[ORM\Column(type: "string", length: 255, unique: true)]
     private string $title;
 
-    #[Assert\NotBlank]
-    #[ORM\Column(type: 'string', length: 255, unique: true)]
-    private string $slug;
 
     #[Assert\NotBlank]
-    #[ORM\Column(type: 'text')]
+    #[ORM\Column(type: "string", length: 255, unique: true)]
+    private string $slug;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private ?string $attachment = null;
+
+    #[Vich\UploadableField(mapping: 'products', fileNameProperty: 'attachment')]
+    private ?File $attachmentFile = null;
+
+
+
+    #[Assert\NotBlank]
+    #[ORM\Column(type: "text")]
     private string $content;
 
     #[Assert\NotBlank]
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: "string", length: 255)]
     private string $state = self::STATES[0];
 
+
     #[Assert\NotNull]
-    #[ORM\Column(type: 'datetime_immutable')]
+    #[ORM\Column(type: "datetime_immutable")]
     private \DateTimeImmutable $createdAt;
 
+
     #[Assert\NotNull]
-    #[ORM\Column(type: 'datetime_immutable')]
+    #[ORM\Column(type: "datetime_immutable")]
     private \DateTimeImmutable $updatedAt;
 
-    #[ORM\OneToOne(inversedBy: 'post', targetEntity: Thumbnail::class, cascade: ['persist', 'remove'])]
-    private ?Thumbnail $thumbnail = null;
 
-    #[ORM\ManyToMany(targetEntity: Category::class, mappedBy: 'posts')]
+
+
+    #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: "posts")]
     private Collection $categories;
 
-    #[ORM\OneToMany(mappedBy: 'post', targetEntity: Comment::class, orphanRemoval: true)]
+    /**
+     * @ORM\OneToMany(mappedBy="post", targetEntity=Comment::class, orphanRemoval=true)
+     */
+    #[ORM\OneToMany(mappedBy: "post", targetEntity: Comment::class, orphanRemoval: true)]
     private Collection $comments;
 
     public function __construct()
@@ -64,12 +89,18 @@ class Post
         $this->comments = new ArrayCollection();
     }
 
+    /**
+     * @ORM\PrePersist
+     */
     #[ORM\PrePersist]
     public function prePersist(): void
     {
         $this->slug = (new Slugify())->slugify($this->title);
     }
 
+    /**
+     * @ORM\PreUpdate
+     */
     #[ORM\PreUpdate]
     public function preUpdate(): void
     {
@@ -107,6 +138,7 @@ class Post
     {
         return $this->content;
     }
+
     public function getSanitizedContent(): string
     {
         return strip_tags($this->content);
@@ -151,24 +183,7 @@ class Post
         return $this;
     }
 
-    public function getThumbnail(): ?Thumbnail
-    {
-        return $this->thumbnail;
-    }
 
-    public function setThumbnail(?Thumbnail $thumbnail): self
-    {
-        if ($thumbnail === null && $this->thumbnail !== null) {
-            $this->thumbnail->setPost(null);
-        }
-
-        if ($thumbnail !== null && $thumbnail->getPost() !== $this) {
-            $thumbnail->setPost($this);
-        }
-
-        $this->thumbnail = $thumbnail;
-        return $this;
-    }
 
     public function getCategories(): Collection
     {
@@ -179,16 +194,13 @@ class Post
     {
         if (!$this->categories->contains($category)) {
             $this->categories[] = $category;
-            $category->addPost($this);
         }
         return $this;
     }
 
     public function removeCategory(Category $category): self
     {
-        if ($this->categories->contains($category)) {
-            $category->removePost($this);
-        }
+        $this->categories->removeElement($category);
         return $this;
     }
 
@@ -205,4 +217,36 @@ class Post
         }
         return $this;
     }
+
+    /**
+     * @return string|null
+     */
+    public function getAttachment(): ?string
+    {
+        return $this->attachment;
+    }
+
+    public function setAttachment(string $attachment): self
+    {
+        $this->attachment = $attachment;
+
+        return $this;
+    }
+
+    public function getAttachmentFile(): ?File
+    {
+        return $this->attachmentFile;
+    }
+
+    public function setAttachmentFile(?File $attachmentFile = null): void
+    {
+        $this->attachmentFile = $attachmentFile;
+
+        if (null !== $attachmentFile) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+
+
 }
