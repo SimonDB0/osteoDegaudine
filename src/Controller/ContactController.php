@@ -43,6 +43,7 @@ class ContactController extends AbstractController
 
             $this->addFlash('success', 'Votre message a été envoyé. Nous vous répondrons dans les plus brefs délais.');
             return $this->redirectToRoute('app_blog');
+
         }
 
         return $this->render('contact/index.html.twig', [

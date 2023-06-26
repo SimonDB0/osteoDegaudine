@@ -8,6 +8,7 @@
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.css';
 import 'tw-elements'
+import Like from './scripts/like';
 
 
 // menu hamburger
@@ -28,3 +29,16 @@ document.addEventListener("DOMContentLoaded", function() {
         dropdownMenu.classList.toggle("hidden");
     });
 });
+
+//like
+
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('Webpack Encore is working !');
+
+    // Like's system
+    const likeElements = [].slice.call(document.querySelectorAll('a[data-action="like"]'));
+    if (likeElements) {
+        new Like(likeElements);
+    }
+})
+

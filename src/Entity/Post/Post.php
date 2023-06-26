@@ -2,6 +2,7 @@
 
 namespace App\Entity\Post;
 
+use App\Entity\User;
 use Cocur\Slugify\Slugify;
 use App\Repository\Post\PostRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -81,12 +82,17 @@ class Post
     #[ORM\OneToMany(mappedBy: "post", targetEntity: Comment::class, orphanRemoval: true)]
     private Collection $comments;
 
+    #[ORM\ManyToMany(targetEntity: User::class)]
+    #[ORM\JoinTable('user_post_like')]
+    private Collection $likes;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
         $this->updatedAt = new \DateTimeImmutable();
         $this->categories = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->likes = new ArrayCollection();
     }
 
     /**
@@ -247,6 +253,40 @@ class Post
         }
     }
 
+    public function getLikes():Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike (User $like) :self
+    {
+        if(!$this->likes->contains($like)) {
+            $this->likes[] = $like;
+        }
+
+        return $this;
+    }
+
+    public function removeLike (User $like) :self
+    {
+        $this->likes->removeElement($like);
+        return $this;
+    }
+
+    public function isLikedByUser(User $user) : bool
+    {
+        return $this->likes->contains($user);
+    }
+
+    public function howManyLikes(): int
+    {
+        return count($this->likes);
+    }
+
+    public function __toString(): string
+    {
+        return $this ->title;
+    }
 
 
 }
