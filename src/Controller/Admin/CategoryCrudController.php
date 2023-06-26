@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Post\Category;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -18,10 +19,11 @@ class CategoryCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        return [
-            TextField::new('name', 'Nom de la catégorie'),
-            TextareaField::new('description', 'Description')->hideOnIndex(),
-            AssociationField::new('posts', 'Articles associés')->hideOnForm(),
-        ];
+
+            yield TextField::new('name')->setLabel('Name');
+            yield SlugField::new('slug')->setTargetFieldName('name');
+            yield TextareaField::new('description', 'Description')->hideOnIndex();
+            yield AssociationField::new('posts', 'Articles associés')->hideOnForm();
+
     }
 }
