@@ -16,7 +16,6 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
                 </svg>
             </button>
-            <div class="hidden md:block" id="user-links">
                 {% if app.user %}
                     <div>
                         {% if 'ROLE_ADMIN' in app.user.roles %}
@@ -41,5 +40,4 @@
                 {% endif %}
             </div>
         </div>
-    </div>
 </nav>
