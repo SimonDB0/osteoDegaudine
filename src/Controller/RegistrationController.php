@@ -39,7 +39,7 @@ class RegistrationController extends AbstractController
 
             // Envoyer l'email
             $email = (new Email())
-                ->from('simondeboe7090@gmail.com')
+                ->from('contact@estelle-degaudine.be')
                 ->to($user->getEmail())
                 ->subject('Confirmation de votre compte')
                 ->text('Veuillez cliquer sur le lien suivant pour confirmer votre compte : ' . $url);
