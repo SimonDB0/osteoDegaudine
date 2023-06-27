@@ -30,7 +30,8 @@
                             </div>
                         {% endif %}
                         <a class="text-blue-600 text-sm font-semibold hover:text-indigo-500" href="{{ path('security.logout') }}">Logout</a>
-                        <p class="text-gray-800 text-sm font-bold ml-2">{{ app.user }}</p>
+                        <a class="text-blue-600 text-sm font-semibold hover:text-indigo-500" href="{{ path('admin') }}">{{ app.user }}</a>
+
                     </div>
                 {% else %}
                     <div>
