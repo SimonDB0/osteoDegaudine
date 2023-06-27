@@ -10,7 +10,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends AbstractController
 {
 
-    #[Route('/connexion', name: 'security.login',methods: ['GET', 'POST'])]
+    #[Route('/connexion', name: 'security.login')]
     public function login(AuthenticationUtils $utils): Response
     {
         // recupere l'erreur si il y en a une

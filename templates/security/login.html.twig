@@ -4,10 +4,11 @@
 {% endblock %}
 
 {% block body %}
-    {% if error %}
-        <div class="error login">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% if error and app.user is not null and not app.user.hasRole('ROLE_ADMIN') %}
+        <div class="alert alert-danger">
+            Une erreur est survenue, le nom d'utilisateur ou le mot de passe est invalide
+        </div>
     {% endif %}
-
     <div class="flex justify-center items-center flex-wrap h-full g-6 text-gray-800 m-24">
         <div class="grow-0 shrink-1 md:shrink-0 basis-auto xl:w-6/12 lg:w-6/12 md:w-9/12 mb-12 md:mb-0">
             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" class="w-fit" alt="Phone image"/>

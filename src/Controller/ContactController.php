@@ -17,11 +17,11 @@ class ContactController extends AbstractController
     public function index(Request $request, MailerInterface $mailer)
     {
         $form = $this->createForm(ContactType::class);
-
+//verification du formulaire
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $contactFormData = $form->getData();
-
+//Creation email
             $email = (new Email())
                 ->from($contactFormData['email'])
                 ->to('contact@estelle-degaudine.be')
@@ -39,7 +39,7 @@ class ContactController extends AbstractController
                     '<p><strong>Email:</strong> ' . $contactFormData['email'] . '</p>' .
                     '<p><strong>Message:</strong> ' . $contactFormData['message'] . '</p>'
                 );
-
+//envoie email
             try {
                 $mailer->send($email);
             } catch (TransportExceptionInterface $e) {
