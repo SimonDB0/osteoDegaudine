@@ -55,4 +55,14 @@ class ContactController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+
+/*      #[Route("/contact/success", name:"contact_success")]
+
+    public function contactSuccess(): Response
+    {
+        $this->addFlash('success', 'Your message has been sent successfully.');
+
+        return $this->redirectToRoute('app_blog');
+    }*/
 }
