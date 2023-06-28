@@ -24,6 +24,8 @@ class SecurityController extends AbstractController
             ]
         );
     }
+
+    //deconnexion
 #[Route('/deconnexion', name: 'security.logout',methods: ['GET'])]
     public function logout() : void
     {

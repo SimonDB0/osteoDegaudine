@@ -16,29 +16,29 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
                 </svg>
             </button>
-                {% if app.user %}
-                    <div>
-                        {% if 'ROLE_ADMIN' in app.user.roles %}
-                            <div class="relative">
+            {% if app.user %}
+                <div>
+                    {% if 'ROLE_ADMIN' in app.user.roles %}
+                        <div class="relative">
+                            <button class="text-blue-600 text-sm font-semibold hover:text-indigo-500 ml-2 focus:outline-none" id="admin-dropdown-toggle">
+                                Admin
+                            </button>
+                            <div class="absolute right-0 mt-2 py-2 w-48 bg-white border border-gray-300 rounded shadow-md hidden" id="admin-dropdown">
+                                <!-- Contenu du dropdown -->
+                                <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-500 hover:text-white" href="{{ path('admin') }}">Tableau de bord</a>
 
-                                <div class="absolute right-0 mt-2 py-2 w-48 bg-white border border-gray-300 rounded shadow-md hidden" id="admin-dropdown">
-                                    <!-- Contenu du dropdown -->
-
-                                    <button class="text-blue-600 text-sm font-semibold hover:text-indigo-500" href="{{ path('admin') }}">Administration</button>
-
-                                </div>
                             </div>
-                        {% endif %}
-                        <a class="text-blue-600 text-sm font-semibold hover:text-indigo-500" href="{{ path('security.logout') }}">Logout</a>
-                        <p class="text-black text-sm font-semibold hover:text-indigo-500">{{ app.user }}</p>
-
-                    </div>
-                {% else %}
-                    <div>
-                        <a class="text-sm font-semibold hover:text-indigo-500 text-blue-600" href="{{ path('security.login') }}">Connexion</a>
-                        <a class="text-sm font-semibold hover:text-indigo-500 ml-2 text-blue-600" href="{{ path('account_register') }}">Inscription</a>
-                    </div>
-                {% endif %}
-            </div>
+                        </div>
+                    {% endif %}
+                    <a class="text-blue-600 text-sm font-semibold hover:text-indigo-500" href="{{ path('security.logout') }}">Logout</a>
+                    <a class="text-blue-600 text-sm font-semibold hover:text-indigo-500" href="{{ path('admin') }}">{{ app.user }}</a>
+                </div>
+            {% else %}
+                <div>
+                    <a class="text-sm font-semibold hover:text-indigo-500 text-blue-600" href="{{ path('security.login') }}">Connexion</a>
+                    <a class="text-sm font-semibold hover:text-indigo-500 ml-2 text-blue-600" href="{{ path('account_register') }}">Inscription</a>
+                </div>
+            {% endif %}
         </div>
+    </div>
 </nav>

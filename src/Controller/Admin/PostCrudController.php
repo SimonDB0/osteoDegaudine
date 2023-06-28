@@ -29,12 +29,16 @@ class PostCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
+            // si un artcle (on met au singulier)
             ->setEntityLabelInPlural('Articles')
             ->setEntityLabelInSingular('Article')
+
+            //inialisation du theme ck editor pour le content de l'article
             ->addFormTheme('@FOSCKEditor/Form/ckeditor_widget.html.twig');
     }
 
     public function configureFields(string $pageName): iterable
+    // mise en place des options dans l'admin
     {
         yield TextField::new('title')->setLabel('Titre');
         yield SlugField::new('slug')->setTargetFieldName('title');

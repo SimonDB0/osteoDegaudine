@@ -49,7 +49,7 @@ class RegistrationController extends AbstractController
                 'success',
                 "Votre compte a bien été créé, veuillez vérifier vos emails pour le confirmer"
             );
-
+//redirection vers le blog
             return $this->redirectToRoute('app_blog');
         }
 

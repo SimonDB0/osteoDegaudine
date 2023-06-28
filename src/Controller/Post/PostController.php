@@ -15,6 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PostController extends AbstractController
 {
+// Affichage de la liste des articles
     #[Route('/blog', name: 'app_blog', methods: ['GET'])]
     public function index(
         PostRepository     $postRepository,
@@ -26,13 +27,13 @@ class PostController extends AbstractController
         $posts = $paginatorInterface->paginate(
             $data,
             $request->query->getInt('page', 1),
-
         );
         return $this->render('post/index.html.twig', [
             'posts' => $posts,
         ]);
     }
 
+// Affichage d'un article avec ses commentaires
     #[Route('/blog/article/{slug}', name: 'app_blog_show', methods: ['GET', 'POST'])]
     public function show(Post $post, Request $request, EntityManagerInterface $em): Response
     {
@@ -62,6 +63,7 @@ class PostController extends AbstractController
         ]);
     }
 
+// Recherche d'articles
     #[Route('/blog/search', name: 'app_blog_search', methods: ['GET'])]
     public function search(
         PostRepository     $postRepository,
@@ -80,6 +82,4 @@ class PostController extends AbstractController
             'posts' => $posts,
         ]);
     }
-
-
 }

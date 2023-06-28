@@ -16,7 +16,7 @@ class LikeController extends AbstractController
     public function like(Post $post, EntityManagerInterface $manager): Response
     {
         $user = $this->getUser();
-
+//retiré un like si l'utilisateur a deja liker
         if($post->isLikedByUser($user)){
             $post->removeLike($user);
             $manager->flush();
@@ -27,7 +27,7 @@ class LikeController extends AbstractController
             ]);
 
         }
-
+//Rajoute un like si âs encore de like
         $post->addLike($user);
         $manager->flush();
         return $this->json([

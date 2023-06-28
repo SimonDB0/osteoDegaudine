@@ -39,7 +39,7 @@ class ContactController extends AbstractController
                     '<p><strong>Email:</strong> ' . $contactFormData['email'] . '</p>' .
                     '<p><strong>Message:</strong> ' . $contactFormData['message'] . '</p>'
                 );
-//envoie email
+            //envoie email
             try {
                 $mailer->send($email);
             } catch (TransportExceptionInterface $e) {

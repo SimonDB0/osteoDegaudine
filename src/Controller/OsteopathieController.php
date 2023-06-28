@@ -11,6 +11,8 @@ class OsteopathieController extends AbstractController
     #[Route('/osteopathie', name: 'app_osteopathie')]
     public function index(): Response
     {
+
+        //renvoie vers le tempalte
         return $this->render('osteopathie/index.html.twig', [
             'controller_name' => 'OsteopathieController',
         ]);
