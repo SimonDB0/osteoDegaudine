@@ -2,6 +2,8 @@
 
 namespace App\Entity\Post;
 
+use ApiPlatform\Metadata\ApiProperty;
+use ApiPlatform\Metadata\ApiResource;
 use App\Entity\User;
 use Cocur\Slugify\Slugify;
 use App\Repository\Post\PostRepository;
@@ -20,6 +22,7 @@ use Symfony\Component\HttpFoundation\File\File;
 #[ORM\HasLifecycleCallbacks]
 #[UniqueEntity("slug", message: "Ce slug existe déjà.")]
 #[Vich\Uploadable]
+#[ApiResource]
 class Post
 {
     const STATES = ['STATE_DRAFT', 'STATE_PUBLISHED', 'STATE_ARCHIVED'];
@@ -253,27 +256,27 @@ class Post
         }
     }
 
-    public function getLikes():Collection
+    public function getLikes(): Collection
     {
         return $this->likes;
     }
 
-    public function addLike (User $like) :self
+    public function addLike(User $like): self
     {
-        if(!$this->likes->contains($like)) {
+        if (!$this->likes->contains($like)) {
             $this->likes[] = $like;
         }
 
         return $this;
     }
 
-    public function removeLike (User $like) :self
+    public function removeLike(User $like): self
     {
         $this->likes->removeElement($like);
         return $this;
     }
 
-    public function isLikedByUser(User $user) : bool
+    public function isLikedByUser(User $user): bool
     {
         return $this->likes->contains($user);
     }
@@ -285,8 +288,6 @@ class Post
 
     public function __toString(): string
     {
-        return $this ->title;
+        return $this->title;
     }
-
-
 }

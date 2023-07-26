@@ -2,6 +2,7 @@
 
 namespace App\Entity\Post;
 
+use ApiPlatform\Metadata\ApiResource;
 use App\Repository\Post\CategoryRepository;
 use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -13,6 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 #[ORM\HasLifecycleCallbacks]
 #[UniqueEntity('slug', message: 'Ce slug existe déjà')]
+#[ApiResource()]
 class Category
 {
     #[ORM\Id]

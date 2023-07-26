@@ -34,8 +34,5 @@ class LikeController extends AbstractController
             'message' => 'Le like a été ajouté.',
             'nbLike' => $post->howManyLikes()
         ]);
-
-
-
     }
 }
