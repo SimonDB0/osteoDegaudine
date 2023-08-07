@@ -4,6 +4,9 @@ namespace App\Entity\Post;
 
 use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Put;
 use App\Entity\User;
 use Cocur\Slugify\Slugify;
 use App\Repository\Post\PostRepository;
@@ -16,22 +19,18 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
 
-
+// i need to make this entity an api platform
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
 #[ORM\HasLifecycleCallbacks]
 #[UniqueEntity("slug", message: "Ce slug existe déjà.")]
 #[Vich\Uploadable]
-#[ApiResource]
+#[ApiResource()]
 class Post
 {
     const STATES = ['STATE_DRAFT', 'STATE_PUBLISHED', 'STATE_ARCHIVED'];
 
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column()
-     */
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

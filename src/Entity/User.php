@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -16,12 +17,16 @@ use Symfony\Component\Uid\Uuid;
 #[UniqueEntity('email', message: 'Cette adresse email est déjà utilisée.')]
 #[ORM\HasLifecycleCallbacks]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
-#[ApiResource()]
+#[ApiResource(
+    operations:
+        new Get()
+)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue('CUSTOM')]
     #[ORM\Column(type: 'uuid', unique: true)]
+    #[ApiProperty]
     #[ORM\CustomIdGenerator('doctrine.uuid_generator')]
     private ?string $id = null;
 
